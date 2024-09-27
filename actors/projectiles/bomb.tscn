@@ -1,0 +1,116 @@
+[gd_scene load_steps=15 format=3 uid="uid://b6mcocjfekxka"]
+
+[ext_resource type="Script" path="res://actors/projectiles/bomb.gd" id="1_ex5oj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_24360"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1m7io"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqia5"]
+atlas = SubResource("CompressedTexture2D_1m7io")
+region = Rect2(0, 0, 24, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rrbl"]
+atlas = SubResource("CompressedTexture2D_1m7io")
+region = Rect2(25, 0, 24, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7xequ"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqia5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rrbl")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_488bt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bpef"]
+atlas = SubResource("CompressedTexture2D_488bt")
+region = Rect2(0, 576, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln600"]
+atlas = SubResource("CompressedTexture2D_488bt")
+region = Rect2(32, 576, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tddm"]
+atlas = SubResource("CompressedTexture2D_488bt")
+region = Rect2(64, 576, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_teecv"]
+atlas = SubResource("CompressedTexture2D_488bt")
+region = Rect2(96, 576, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qouro"]
+atlas = SubResource("CompressedTexture2D_488bt")
+region = Rect2(128, 576, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smd5e"]
+atlas = SubResource("CompressedTexture2D_488bt")
+region = Rect2(160, 576, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8vove"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bpef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln600")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tddm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_teecv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qouro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smd5e")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"splode",
+"speed": 8.0
+}]
+
+[node name="bomb" type="Area2D" node_paths=PackedStringArray("explosion", "boom")]
+script = ExtResource("1_ex5oj")
+explosion = NodePath("MacaronExplosion")
+boom = NodePath("Boom")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.6, 2.6)
+shape = SubResource("CircleShape2D_24360")
+
+[node name="MacaronExplosion" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7xequ")
+animation = &"explode"
+
+[node name="Boom" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -17)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_8vove")
+animation = &"splode"
+speed_scale = 0.8
+
+[node name="TimeToLive" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="TimeToLive" to="." method="_on_time_to_live_timeout"]

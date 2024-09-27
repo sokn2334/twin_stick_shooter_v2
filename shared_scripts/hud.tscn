@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmdo2gf06f34g"]
+
+[ext_resource type="Script" path="res://shared_scripts/hud.gd" id="1_rym10"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rym10")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 68.0
+offset_bottom = 29.0
+text = "Score: 0"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
