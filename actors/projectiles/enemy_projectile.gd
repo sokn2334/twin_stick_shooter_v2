@@ -19,6 +19,6 @@ func _on_time_to_live_timeout() -> void:
 #If the projectile goes through the player body
 func _on_body_entered(body: Node2D) -> void:
 	#(body as CharacterBody2D).hit(1)
-	
+	ScoreManager.change_health(1)
 	queue_free()
 	pass # Replace with function body.

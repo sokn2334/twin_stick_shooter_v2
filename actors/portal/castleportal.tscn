@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://hcx4n3bkm11l"]
+
+[ext_resource type="Texture2D" uid="uid://bd7hbg37hkiff" path="res://actors/portal/Dimensional_Portal.png" id="1_6eprs"]
+[ext_resource type="Script" path="res://actors/portal/portal.gd" id="2_xuegp"]
+[ext_resource type="AudioStream" uid="uid://cth6nb6almvra" path="res://shared_scripts/WaterAudio.ogg" id="3_yx4ou"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o3hb"]
+atlas = ExtResource("1_6eprs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca3ig"]
+atlas = ExtResource("1_6eprs")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcsbj"]
+atlas = ExtResource("1_6eprs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skhyx"]
+atlas = ExtResource("1_6eprs")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1yjs"]
+atlas = ExtResource("1_6eprs")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iy76"]
+atlas = ExtResource("1_6eprs")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dqu1o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o3hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca3ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcsbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skhyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1yjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iy76")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7ot4"]
+
+[node name="CastlePortal" type="AnimatedSprite2D"]
+self_modulate = Color(0.805446, 0.0333256, 0.168116, 1)
+scale = Vector2(5.80967, 5.80967)
+sprite_frames = SubResource("SpriteFrames_dqu1o")
+animation = &"new_animation"
+frame = 2
+frame_progress = 0.578635
+script = ExtResource("2_xuegp")
+water_music = ExtResource("3_yx4ou")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.20489, -0.172127)
+scale = Vector2(0.611928, 1.48161)
+shape = SubResource("CircleShape2D_c7ot4")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

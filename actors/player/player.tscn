@@ -1,16 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://dr5w36bnnp7ho"]
+[gd_scene load_steps=26 format=3 uid="uid://dr5w36bnnp7ho"]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="1_quoec"]
 [ext_resource type="PackedScene" uid="uid://do7xxhi4fk880" path="res://actors/projectiles/projectile.tscn" id="2_buyrr"]
 [ext_resource type="PackedScene" uid="uid://r15gpao71aj0" path="res://actors/projectiles/melee.tscn" id="3_r8ih5"]
+[ext_resource type="AudioStream" uid="uid://dothspt2pr567" path="res://actors/player/Shoot.wav" id="4_cigm4"]
+[ext_resource type="PackedScene" uid="uid://c8xsx17gxcw22" path="res://actors/projectiles/dual_shot.tscn" id="4_m31oy"]
 [ext_resource type="Texture2D" uid="uid://dfrc8yn0ilbwb" path="res://actors/projectiles/Effects/Retro Impact Effect Pack 2 E.png" id="4_xy8ir"]
+[ext_resource type="AudioStream" uid="uid://0reip0y1u7c" path="res://actors/player/GetHitv4.wav" id="5_bt2qa"]
 [ext_resource type="Texture2D" uid="uid://b5x6hc024tis3" path="res://actors/player/Rabbit_Horned_Idle.png" id="5_xtw5t"]
 [ext_resource type="Texture2D" uid="uid://qhjau0vhhrbv" path="res://actors/player/Rabbit_Horned_Move.png" id="6_p0ou7"]
 [ext_resource type="Texture2D" uid="uid://1afy5rhei4v5" path="res://actors/player/Rabbit_Horned_Attack.png" id="7_17ui8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_244ld"]
-radius = 30.0059
-height = 70.0774
+radius = 37.7508
+height = 78.0016
 
 [sub_resource type="Animation" id="Animation_blw2g"]
 length = 0.001
@@ -721,6 +724,9 @@ motion_mode = 1
 script = ExtResource("1_quoec")
 projectile_scene = ExtResource("2_buyrr")
 melee_scene = ExtResource("3_r8ih5")
+dualshot_scene = ExtResource("4_m31oy")
+shoot_sfx = ExtResource("4_cigm4")
+hit_sfx = ExtResource("5_bt2qa")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -50)
@@ -752,3 +758,8 @@ root_node = NodePath("../MainSprite")
 libraries = {
 "": SubResource("AnimationLibrary_567os")
 }
+
+[node name="ManaTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="ManaTimer" to="." method="_on_mana_timeout"]

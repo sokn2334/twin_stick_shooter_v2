@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpebn71bkegyv"]
+
+[ext_resource type="Texture2D" uid="uid://dfrc8yn0ilbwb" path="res://actors/projectiles/Effects/Retro Impact Effect Pack 2 E.png" id="1_cv6j7"]
+[ext_resource type="Script" path="res://actors/projectiles/singleshoticon.gd" id="2_63i05"]
+[ext_resource type="AudioStream" uid="uid://dothspt2pr567" path="res://actors/player/Shoot.wav" id="3_3jkv7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kal62"]
+atlas = ExtResource("1_cv6j7")
+region = Rect2(320, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg6b4"]
+atlas = ExtResource("1_cv6j7")
+region = Rect2(384, 256, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_niw0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kal62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg6b4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sdn2h"]
+radius = 8.40937
+
+[node name="singleshoticon" type="AnimatedSprite2D"]
+scale = Vector2(5.00009, 5.00009)
+sprite_frames = SubResource("SpriteFrames_niw0y")
+frame_progress = 0.81597
+script = ExtResource("2_63i05")
+collect_sfx = ExtResource("3_3jkv7")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_sdn2h")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

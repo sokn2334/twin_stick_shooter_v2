@@ -1,9 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxxbfge6y88ir"]
+[gd_scene load_steps=26 format=3 uid="uid://bxxbfge6y88ir"]
 
 [ext_resource type="Script" path="res://actors/enemies/small_enemy.gd" id="1_fieh3"]
 [ext_resource type="PackedScene" uid="uid://boc6mncvhosxt" path="res://actors/projectiles/enemy_projectile.tscn" id="2_20gso"]
 [ext_resource type="Texture2D" uid="uid://bkp7jqtgf81u5" path="res://actors/enemies/Canines/Canine_Black_Idle.png" id="2_wh2na"]
+[ext_resource type="AudioStream" uid="uid://87ed56w5ksr3" path="res://actors/projectiles/Monster_Groan_Short.mp3" id="3_5ntkp"]
 [ext_resource type="Texture2D" uid="uid://cng7wb1kmqrne" path="res://actors/enemies/Canines/Canine_White_Attack.png" id="3_5sfy2"]
+[ext_resource type="AudioStream" uid="uid://b1jcxtavshejp" path="res://actors/Monster_Groan.mp3" id="4_5astm"]
 [ext_resource type="Texture2D" uid="uid://qmvccu0bkcbh" path="res://actors/enemies/Canines/Canine_White_Death.png" id="4_667ya"]
 [ext_resource type="Texture2D" uid="uid://dv0hgqy4mci5t" path="res://actors/enemies/Canines/Canine_White_Idle.png" id="5_vw0hl"]
 [ext_resource type="Texture2D" uid="uid://bvwe858ryagko" path="res://actors/enemies/Canines/Canine_White_Run.png" id="6_2d34x"]
@@ -620,8 +622,11 @@ radius = 299.015
 scale = Vector2(0.442254, 0.442254)
 collision_layer = 4
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_fieh3")
 projectile_scene = ExtResource("2_20gso")
+wounded_sfx = ExtResource("3_5ntkp")
+death_sfx = ExtResource("4_5astm")
 initial_state = NodePath("States/IdleSmall")
 
 [node name="CanineWhite" type="Sprite2D" parent="."]
@@ -666,7 +671,7 @@ scale = Vector2(3.79768, 3.79768)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-scale = Vector2(19.7558, 19.7558)
+scale = Vector2(26.2506, 26.2506)
 shape = SubResource("CircleShape2D_c3sbj")
 debug_color = Color(1, 0.00817797, 0.0443347, 0.42)
 

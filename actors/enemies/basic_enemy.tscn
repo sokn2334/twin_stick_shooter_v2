@@ -1,10 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://dhd7cwrl44syq"]
+[gd_scene load_steps=24 format=3 uid="uid://dhd7cwrl44syq"]
 
 [ext_resource type="Script" path="res://actors/enemies/basic_enemy.gd" id="1_08ety"]
 [ext_resource type="Texture2D" uid="uid://bkp7jqtgf81u5" path="res://actors/enemies/Canines/Canine_Black_Idle.png" id="2_1xk4c"]
 [ext_resource type="Script" path="res://actors/enemies/idle.gd" id="2_8y2hn"]
+[ext_resource type="AudioStream" uid="uid://b1i7v2xynqypc" path="res://actors/enemies/Monster_Groan_Short.mp3" id="2_kk3yl"]
 [ext_resource type="Script" path="res://actors/enemies/chasing.gd" id="3_8mhjd"]
 [ext_resource type="Texture2D" uid="uid://by3i7gqvq2jq3" path="res://actors/enemies/Canines/Canine_Black_Run.png" id="3_fnrsa"]
+[ext_resource type="AudioStream" uid="uid://dn1248icxaw7h" path="res://actors/enemies/Monster_Groan.mp3" id="3_q808s"]
 [ext_resource type="Texture2D" uid="uid://s4jvovn11n5u" path="res://actors/enemies/Canines/Canine_Black_Attack.png" id="4_tnajd"]
 [ext_resource type="Texture2D" uid="uid://dldk86ndgssp" path="res://actors/enemies/Canines/Canine_Black_Death.png" id="5_s6v2d"]
 [ext_resource type="Script" path="res://actors/enemies/death.gd" id="8_mawv4"]
@@ -613,11 +615,15 @@ height = 92.233
 radius = 299.015
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c3sbj"]
+radius = 8.80885
 
 [node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
 collision_layer = 4
 collision_mask = 7
+motion_mode = 1
 script = ExtResource("1_08ety")
+wounded_sfx = ExtResource("2_kk3yl")
+death_sfx = ExtResource("3_q808s")
 initial_state = NodePath("States/Idle")
 
 [node name="CanineBlack" type="Sprite2D" parent="."]
@@ -659,6 +665,8 @@ shape = SubResource("CircleShape2D_ivv60")
 [node name="BiteTimer" type="Timer" parent="."]
 
 [node name="AttackRange" type="Area2D" parent="."]
+position = Vector2(-4, 19)
+scale = Vector2(0.873603, 0.648598)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
@@ -668,3 +676,4 @@ debug_color = Color(1, 0.00817797, 0.0443347, 0.42)
 
 [connection signal="timeout" from="BiteTimer" to="." method="_on_bite_timer_timeout"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

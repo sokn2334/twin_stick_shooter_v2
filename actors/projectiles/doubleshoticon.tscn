@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2dw3bjwu0elj"]
+
+[ext_resource type="Texture2D" uid="uid://dfrc8yn0ilbwb" path="res://actors/projectiles/Effects/Retro Impact Effect Pack 2 E.png" id="1_6p5ao"]
+[ext_resource type="Script" path="res://actors/projectiles/doubleshoticon.gd" id="2_hducc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uohm2"]
+atlas = ExtResource("1_6p5ao")
+region = Rect2(0, 512, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq68b"]
+atlas = ExtResource("1_6p5ao")
+region = Rect2(64, 512, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fivs"]
+atlas = ExtResource("1_6p5ao")
+region = Rect2(128, 512, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbxhs"]
+atlas = ExtResource("1_6p5ao")
+region = Rect2(192, 512, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hocc2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uohm2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq68b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fivs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbxhs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sdn2h"]
+radius = 8.40937
+
+[node name="doubleshoticon" type="AnimatedSprite2D"]
+scale = Vector2(1.53441, 1.53441)
+sprite_frames = SubResource("SpriteFrames_hocc2")
+frame_progress = 0.725787
+script = ExtResource("2_hducc")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5)
+scale = Vector2(1.6567, 1.6567)
+shape = SubResource("CircleShape2D_sdn2h")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

@@ -3,10 +3,14 @@ class_name SplitEnemy
 
 @export var hp:int = 3
 @export var basic_enemy: Resource
+@export var wounded_sfx:Resource
+@export var death_sfx:Resource
 
 func hit(damage_number: int):
 	hp -= damage_number
+	GlobalAudioManager.play_SFX(wounded_sfx, 0.2)
 	if(hp == 0):
+		GlobalAudioManager.play_SFX(death_sfx, 0.2)
 		var new_enemy = basic_enemy.instantiate()
 		get_parent().add_child(new_enemy)
 		new_enemy.position = $ProjectileRefPoint.global_position
@@ -14,8 +18,7 @@ func hit(damage_number: int):
 		var new_enemy2 = basic_enemy.instantiate()
 		get_parent().add_child(new_enemy2)
 		new_enemy2.position = ($ProjectileRefPoint.global_position) + Vector2(40,40)
-		print("count")
-		get_tree().get_root().get_node("Main/HUD").add_score(1)
+		ScoreManager.add_score(100)
 		on_change_state($States/DeathSplit) #Play an animation on death
 
 

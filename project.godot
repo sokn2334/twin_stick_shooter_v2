@@ -15,6 +15,14 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ScoreManager="*res://shared_scripts/score_manager.gd"
+GlobalAudioManager="*res://shared_scripts/global_audio_manager.tscn"
+MManager="*res://M_manager.gd"
+Water="*res://water.gd"
+WeaponManager="*res://actors/projectiles/weapon_manager.gd"
+
 [input]
 
 move_left={

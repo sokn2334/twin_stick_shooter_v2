@@ -23,7 +23,7 @@ func _on_body_entered(body: Node2D) -> void:
 	elif(body is SmallEnemy):
 		(body as SmallEnemy).hit(1)
 	elif(body is SplitEnemy):
-			(body as SplitEnemy).hit(1)
+		(body as SplitEnemy).hit(1)
 	
 	queue_free()
 	pass # Replace with function body.
